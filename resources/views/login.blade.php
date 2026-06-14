@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>To-Do List</title>
+    <title>To-Do List - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-<h1>To-Do List</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
 
-<h2>Log In</h2>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
 
-<form action="/login" method="POST">
-    @csrf
+                    <h4 class="card-title text-center mb-4 fw-bold text-primary">To-Do List</h4>
+                    <h6 class="text-center text-muted mb-4">Masuk ke akun kamu</h6>
 
-    <label>Username</label><br>
-    <input type="text" name="username" value="{{ old('username') }}">
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
 
-    @error('username')
-        <br>
-        <small>{{ $message }}</small>
-    @enderror
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
 
-    <br><br>
+                    <form action="/login" method="POST">
+                        @csrf
 
-    <label>Password</label><br>
-    <input type="password" name="password">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username"
+                                class="form-control @error('username') is-invalid @enderror"
+                                value="{{ old('username') }}"
+                                placeholder="Masukkan username">
+                            @error('username')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-    @error('password')
-        <br>
-        <small>{{ $message }}</small>
-    @enderror
+                        <div class="mb-4">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                placeholder="Masukkan password">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-    @if (session('error'))
-        <br>
-        <small>{{ session('error') }}</small>
-    @endif
+                        <button type="submit" class="btn btn-primary w-100">Masuk</button>
+                    </form>
 
-    <br><br>
+                    <p class="text-center mt-3 mb-0 text-muted small">
+                        Belum punya akun?
+                        <a href="/register" class="text-primary">Daftar di sini</a>
+                    </p>
 
-    <button type="submit">Log In</button>
-</form>
+                </div>
+            </div>
 
-<p>
-    Belum memiliki akun?
-    <a href="/register">Buat Akun</a>
-</p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

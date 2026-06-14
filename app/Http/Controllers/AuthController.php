@@ -62,7 +62,11 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard');
+        $todos = \App\Models\Todo::where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('dashboard', compact('todos'));
     }
 
     public function logout(Request $request)
