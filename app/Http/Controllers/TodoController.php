@@ -10,6 +10,7 @@ class TodoController extends Controller
 {
     public function create()
 {
+    // deni 
     return view('todos.create');
 }
 
