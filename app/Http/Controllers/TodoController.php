@@ -16,6 +16,7 @@ class TodoController extends Controller
 
     public function store(Request $request)
     {
+        //deni
         $request->validate([
             'judul' => 'required',
             'tenggat_waktu' => 'nullable|date',
